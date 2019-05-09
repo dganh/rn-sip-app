@@ -10,7 +10,7 @@ export default class CallControls extends Component {
 
     const call = props.call
     const {height: screenHeight, width: screenWidth} = Dimensions.get('window')
-    const answerable = call.getState() == "PJSIP_INV_STATE_INCOMING"
+    const answerable = call.getState() == "PJSIP_INV_STATE_NULL"
 
     const space = (screenWidth - 64 * 3) / 4
     let hangupOffset = space
@@ -40,7 +40,7 @@ export default class CallControls extends Component {
   componentWillReceiveProps(nextProps) {
     const call = nextProps.call
 
-    if (call.getState() != 'PJSIP_INV_STATE_INCOMING') {
+    if (call.getState() != 'PJSIP_INV_STATE_NULL') {
       Animated.parallel([
         Animated.timing(this.state.hangupOffset, {toValue: this.state.answerOffset})
       ]).start()
@@ -58,7 +58,7 @@ export default class CallControls extends Component {
   }
 
   onAnswerPress() {
-    if (this.props.call.getState() == "PJSIP_INV_STATE_INCOMING") {
+    if (this.props.call.getState() == "PJSIP_INV_STATE_NULL") {
       this.props.onAnswerPress && this.props.onAnswerPress()
     }
   }
@@ -95,7 +95,7 @@ export default class CallControls extends Component {
           )
         }
 
-        {
+{
           this.state.answerable && (
             <Animated.View
               style={[{left: this.state.transferOffset, opacity: this.state.transferOpacity}, s.buttonContainer]}

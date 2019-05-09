@@ -32,7 +32,6 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.tariq86.pjsip"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

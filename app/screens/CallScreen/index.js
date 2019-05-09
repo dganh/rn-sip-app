@@ -437,7 +437,7 @@ class CallScreen extends Component {
               call={call}
             />
           </Animated.View>
-
+          
           <DialerModal
             actions={[
               {icon: "call", text: "Call", callback: this._onCallAddSubmitPress}

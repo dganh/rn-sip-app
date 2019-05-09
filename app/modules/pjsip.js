@@ -419,7 +419,7 @@ export function makeCall(destination, account = null) {
       endpoint.deactivateAudioSession()
     }
 
-    const call = endpoint.makeCall(account, destination)
+    const call = await endpoint.makeCall(account, destination)
 
     // -----
     dispatch(Navigation.goTo({name: 'call', call})) // TODO: Move to another place

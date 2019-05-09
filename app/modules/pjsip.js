@@ -35,7 +35,8 @@ export function init() {
     const endpoint = new Endpoint()
     const state = await endpoint.start({
       service: {
-        ua: Platform.select({ios: "RnSIP iOS", android: "RnSIP Android"})
+        ua: Platform.select({ios: "RnSIP iOS", android: "RnSIP Android"}),
+        stun: ['stun.linphone.org','stun.l.google.com:19302','stun1.l.google.com:19302','stun01.sipphone.com']
       },
       network: {
         useWifi: true,

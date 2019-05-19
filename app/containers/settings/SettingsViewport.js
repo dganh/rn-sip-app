@@ -55,7 +55,7 @@ class SettingsScreen extends Component {
           <Text>Create account</Text>
         </Touchable>
 
-        <ListSection title="Advanced"/>
+        {/* <ListSection title="Advanced"/>
         <ListConfigurationInfo
           onPress={this.props.onNetworkSettingsPress}
           title="Network"
@@ -65,7 +65,7 @@ class SettingsScreen extends Component {
           onPress={this.props.onMediaSettingsPress}
           title="Media"
           description="Codecs and in-call sound behaviour"
-        />
+        /> */}
       </View>
     )
   }

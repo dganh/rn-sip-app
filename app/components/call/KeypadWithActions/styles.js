@@ -23,7 +23,8 @@ export function keyUnderlayColor (theme) {
 export default StyleSheet.create({
   actionsWrapper: {
     flex: 0.281,
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "space-around"
   },
   action: {
     flex: 0.202,

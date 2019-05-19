@@ -107,8 +107,8 @@ function mapDispatchToProps(dispatch) {
 
 const TabNavigator = createBottomTabNavigator({
     Dialer: DialerScreen,
-    Conversations: ConversationsScreen,
-    History: HistoryScreen,
+    // Conversations: ConversationsScreen,
+    // History: HistoryScreen,
     Settings: SettingsScreen,
 })
 

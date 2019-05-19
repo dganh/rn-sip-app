@@ -44,7 +44,7 @@ export default class Keypad extends Component {
           /* Show key only when we know it's width to render square touchable */
           !this.state.keySize ? null :
             <Touchable
-              style={[s.keyTouchable, {width: this.state.keySize}, this.props.keyStyle]}
+              style={{...s.keyTouchable, width: this.state.keySize, ...this.props.keyStyle}}
               onPress={this.onKeyPress.bind(this, digit)}
             >
               <View style={s.keyDigitWrapper}>

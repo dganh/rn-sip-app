@@ -10,7 +10,8 @@ import DialerViewport from './dialer/DialerViewport'
 import SettingsViewport from './settings/SettingsViewport'
 
 import NavigationPager from '../components/viewport/NavigationPager'
-import ViewPager from '../components/common/ViewPager'
+//import ViewPager from '../components/common/ViewPager'
+import ViewPager from "@react-native-community/viewpager";
 
 import cs from '../assets/styles/containers'
 
@@ -63,52 +64,56 @@ class AppViewport extends Component {
   // TODO: Add PhoneInput to Dialer and add line separator between dialer and keypad
 
   render() {
-    const {tab, onTabSelect, onSelectedIndexChange} = this.props
+    const {tab, onTabSelect, onSelectedIndexChange, onSettingsSelect} = this.props
     let tabIndex = 0
 
     switch (tab) {
-      case 'dialer':
+      case 'settings':
         tabIndex = 0
         break
-      case 'conversations':
+      case 'dialer':
         tabIndex = 1
         break
-      case 'history':
+      case 'conversations':
         tabIndex = 2
         break
-      case 'settings':
+      case 'history':
         tabIndex = 3
         break
     }
 
     return (
       <View style={cs.max}>
-        <View style={{height: 50, backgroundColor: '#3f5057', flexDirection: 'row'}}>
+        <View style={{height: 50, backgroundColor: '#778899', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
           <View style={{marginLeft:16, justifyContent: 'center', height: 50}}>
             <Image resizeMode="contain" style={{width: 42}} source={require('../assets/images/logo.png')}/>
           </View>
-          <View style={{flex: 1, justifyContent:'flex-end'}}>
-            <NavigationPager selection={tab} onPress={onTabSelect} />
+          <View style={{marginRight:16}}>
+            {/* <NavigationPager selection={tab} onPress={onTabSelect} /> */}
+            <TouchableHighlight onPress={()=>onSettingsSelect()}>
+              <Image resizeMode="contain" style={{tintColor: '#ffffff'}} source={require('../assets/images/toolbar/settings-icon.png')}/>
+            </TouchableHighlight>
           </View>
         </View>
         <ViewPager
           style={cs.max}
-          count={4}
+          count={2}
           selectedIndex={tabIndex}
           onSelectedIndexChange={onSelectedIndexChange}
         >
           <View style={cs.max}>
-            <DialerViewport />
+            <SettingsViewport />
           </View>
           <View style={cs.max}>
+            <DialerViewport />
+          </View>
+          {/* <View style={cs.max}>
             <ConversationsViewport />
           </View>
           <View style={cs.max}>
             <HistoryViewport />
           </View>
-          <View style={cs.max}>
-            <SettingsViewport />
-          </View>
+          */}
         </ViewPager>
       </View>
     )
@@ -163,6 +168,9 @@ function mapDispatchToProps(dispatch) {
     },
     onDrawerClose: () => {
       dispatch(Navigation.closeDrawer())
+    },
+    onSettingsSelect: () => {
+      dispatch(Navigation.goTo({name: 'network_settings'}))
     }
   }
 }

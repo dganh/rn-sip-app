@@ -36,15 +36,21 @@ export function init() {
     const state = await endpoint.start({
       service: {
         ua: Platform.select({ios: "RnSIP iOS", android: "RnSIP Android"}),
-        stun: ['stun.linphone.org','stun01.sipphone.com','stun.zoiper.com:3478']
+        stun: ['stun.linphone.org', 'stun.l.google.com:19302', 'stun4.l.google.com:19302']
       },
       network: {
         useWifi: true,
-        useOtherNetworks: true
+        useOtherNetworks: true,
+        useAnyway: true,
+        use3g: true,
+        useGprs: true,
+        useEdge: true
       }
     })
+
     const {accounts, calls, settings: endpointSettings, connectivity} = state
 
+    endpointSettings.stun = 'stun.linphone.org, stun.l.google.com:19302, stun4.l.google.com:19302'
     // Subscribe to endpoint events
     endpoint.on("registration_changed", (account) => {
       dispatch(onAccountChanged(account))
@@ -420,7 +426,18 @@ export function makeCall(destination, account = null) {
       endpoint.deactivateAudioSession()
     }
 
-    const call = await endpoint.makeCall(account, destination)
+    let options = {
+      headers: {
+        "P-Assserted-Identity": `<${account._data.uri}>`,
+        "X-UA": "React native",
+        "Route": `<${account._data.proxy};transport=tcp;nat=yes>`,
+        "To": `<${destination}>`
+      },
+      audioCount: 1,
+      videoCount: 0    
+    }
+    console.log(account)
+    const call = await endpoint.makeCall(account, destination, options)
 
     // -----
     dispatch(Navigation.goTo({name: 'call', call})) // TODO: Move to another place
@@ -521,15 +538,19 @@ export function xferReplacesCall(call, destinationCall) {
 export function changeNetworkSettings(configuration) {
   return async (dispatch, getState) => {
     const endpoint = getState().pjsip.endpoint
-    await endpoint.changeNetworkConfiguration(configuration)
+    //await endpoint.changeNetworkConfiguration(configuration)
 
+    const stun = configuration.enableStun ? configuration.stunServers.split(',') : []
+    let currentSettings = getState().pjsip.endpointSettings
+    currentSettings.codecs = JSON.parse(configuration.codecs)
     const serviceConfiguration = {
-      ...getState().pjsip.endpointSettings.service,
-      foreground: configuration.foreground
+      ...currentSettings,
+      foreground: configuration.foreground,
+      stun
     }
     const settings = await endpoint.changeServiceConfiguration(serviceConfiguration)
 
-    dispatch({type: CHANGED_SETTINGS, payload: settings})
+    dispatch({type: CHANGED_SETTINGS, payload: {foreground: configuration.foreground, stun: stun.toString()}})
     dispatch(Navigation.goAndReplace({name: 'settings'}))
   }
 }

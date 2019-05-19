@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import {View} from 'react-native'
 
 import s from './styles'
-import ViewPager from '../../common/ViewPager'
+//import ViewPager from '../../common/ViewPager'
+import ViewPager from "@react-native-community/viewpager";
 import CallAction from '../CallAction'
 
 export default class CallActions extends Component {
@@ -97,8 +98,8 @@ export default class CallActions extends Component {
             <View style={s.actionsPadding}/>
             <View style={s.actionsContent}>
               <View style={s.actionsContentWrapper}>
-                <CallAction type="add" description="add" onPress={this._onAddPress}/>
-                <View style={s.actionSeparator}/>
+                {/* <CallAction type="add" description="add" onPress={this._onAddPress}/>
+                <View style={s.actionSeparator}/> */}
                 <CallAction
                   type={muted ? "unmute" : "mute"}
                   description={muted ? "unmute" : "mute"}
@@ -111,7 +112,7 @@ export default class CallActions extends Component {
                   onPress={this._onSpeakerPress}
                 />
               </View>
-              <View style={s.actionsContentSecondWrapper}>
+              {/* <View style={s.actionsContentSecondWrapper}>
                 <CallAction type="transfer" description="transfer" onPress={this._onTransferPress}/>
                 <View style={s.actionSeparator}/>
                 <CallAction
@@ -121,11 +122,11 @@ export default class CallActions extends Component {
                 />
                 <View style={s.actionSeparator}/>
                 <CallAction type="dtmf" description="dtmf" onPress={this._onDTMFPress}/>
-              </View>
+              </View> */}
             </View>
             <View style={s.actionsPadding}/>
           </View>
-          <View style={s.actionsRow}>
+          {/* <View style={s.actionsRow}>
             <View style={s.actionsPadding}/>
             <View style={s.actionsContent}>
               <View style={s.actionsContentWrapper}>
@@ -144,7 +145,7 @@ export default class CallActions extends Component {
               </View>
             </View>
             <View style={s.actionsPadding}/>
-          </View>
+          </View> */}
         </ViewPager>
         <View style={s.switchContainer}>
           <View style={[s.switchIndicatorLeft, s.switchIndicator, (this.state.actionsIndex === 0 ? s.switchActive : null)]}/>

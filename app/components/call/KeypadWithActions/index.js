@@ -98,7 +98,7 @@ export default class KeypadWithActions extends Component {
         <TouchableOpacity onPress={() => {callback(this.state.value)}} style={touchableStyles}>
           <Image source={icon}/>
         </TouchableOpacity>
-        <Text style={[s.actionText, actionTextStyle]}>{description}</Text>
+        <Text style={{...s.actionText, ...actionTextStyle}}>{description}</Text>
       </View>
     )
   }

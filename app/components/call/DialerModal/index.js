@@ -21,7 +21,7 @@ const DialerModal = ({theme, visible, actions, onRequestClose}) => {
     >
       <View style={[cs.max, containerStyles]}>
         <KeypadWithActions
-          style={[cs.max, contentStyles]}
+          style={{...cs.max, ...contentStyles}}
           theme={theme}
           actions={actions}
         />

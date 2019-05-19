@@ -37,17 +37,17 @@ class AccountScreen extends Component {
       }
     } else {
       this.state = {
-        addable: false,
+        addable: true,
 
-        name: "",
-        username: "",
-        domain: "",
-        password: "",
+        name: "1005",
+        username: "1005",
+        domain: "nemo.com",
+        password: "123456",
 
-        proxy: "",
-        transport: "",
-        regServer: "",
-        regTimeout: ""
+        proxy: "sip:babelott.com:5066",
+        transport: "TCP",
+        regServer: "nemo.com",
+        regTimeout: "3600"
       }
     }
 

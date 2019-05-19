@@ -11,9 +11,9 @@ const DialerViewport = ({onCallPress}) => {
     <KeypadWithActions
       style={cs.max}
       actions={[
-        {icon: "message", text: "Chat", callback: () => {}},
+        // {icon: "message", text: "Chat", callback: () => {}},
         {icon: "call", text: "Call", callback: onCallPress},
-        {icon: "fax", text: "Video", callback: () => {}}
+        // {icon: "fax", text: "Video", callback: () => {}}
       ]}
     />
   )

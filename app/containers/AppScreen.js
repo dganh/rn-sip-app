@@ -40,10 +40,12 @@ class App extends Component {
         return (<AccountScreen />)
       case 'network_settings':
         return (<NetworkSettingsScreen />)
-      case 'media_settings':
-        return (<MediaSettingsScreen />)
+      // case 'media_settings':
+      //   return (<MediaSettingsScreen />)
       default:
-        return (<View />)
+        return (
+          <Viewport navigator={navigator}/>
+        )
     }
   }
 

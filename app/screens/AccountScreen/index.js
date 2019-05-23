@@ -11,6 +11,7 @@ import ListSection from '../../components/common/ListSection'
 import ListTextField from '../../components/common/ListTextField'
 import ListSelectField from '../../components/common/ListSelectField'
 import ListFieldSeparator from '../../components/common/ListFieldSeparator'
+import ListCheckbox from '../../components/common/ListCheckbox'
 
 import s from './styles'
 import cs from '../../assets/styles/containers'
@@ -47,7 +48,10 @@ class AccountScreen extends Component {
         proxy: "sip:babelott.com:5066",
         transport: "TCP",
         regServer: "nemo.com",
-        regTimeout: "3600"
+        regTimeout: "3600",
+        useStun: false,
+        useICE: false,
+        rewrite: true
       }
     }
 
@@ -84,7 +88,10 @@ class AccountScreen extends Component {
       proxy: this.state.proxy,
       transport: this.state.transport,
       regServer: this.state.regServer,
-      regTimeout: this.state.regTimeout
+      regTimeout: this.state.regTimeout,
+      useStun: this.state.useStun,
+      useICE: this.state.useICE,
+      rewrite: this.state.rewrite
     }
 
     if (this.props.account) {
@@ -183,6 +190,18 @@ class AccountScreen extends Component {
             title="Registration Timeout"
             placeholder="Interval for registration, in seconds"
             value={this.state.regTimeout} onChange={this._onRegTimeoutChanged}
+          />
+          <ListCheckbox
+            value={this.state.useStun}
+            title="Use Stun"
+          />
+          <ListCheckbox
+            value={this.state.useICE}
+            title="Use ICE"
+          />
+          <ListCheckbox
+            value={this.state.rewrite}
+            title="Allow SDP NAT rewrite"
           />
         </ScrollView>
         {

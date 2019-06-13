@@ -22,7 +22,7 @@
         "react-native-deprecated-custom-components": "^0.1.2",
         "react-native-gesture-handler": "^1.1.0",
         "react-native-linear-gradient": "^2.5.4",
-        "react-native-pjsip": "git+https://github.com/datso/react-native-pjsip.git",
+        "react-native-pjsip": "git+https://github.com/dganh/react-native-pjsip.git",
         "react-native-viewpager": "^0.2.11",
         "react-native-voip-push-notification": "git+https://github.com/datso/react-native-voip-push-notification.git",
         "react-navigation": "^3.9.0",
